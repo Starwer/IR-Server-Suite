@@ -815,7 +815,7 @@ namespace IrssUtils
       if (commands == null)
         throw new ArgumentNullException("commands");
 
-      Uri uri = new Uri(ReplaceSpecial(commands[0]).ToString());
+      Uri uri = new Uri(ReplaceSpecialVariables(commands[0]));
 
       WebRequest request = WebRequest.Create(uri);
       request.Timeout = int.Parse(commands[1]);
@@ -1023,16 +1023,17 @@ namespace IrssUtils
     }
 
     /// <summary>
-    /// Replace all instances of environment variables, special values and escape codes.
+    /// Replace all instances of environment variables and special values.
     /// </summary>
     /// <param name="input">The input to process.</param>
     /// <returns>Processed input string.</returns>
-    public static Byte[] ReplaceSpecial(string input)
+    public static string ReplaceSpecialVariables(string input)
     {
       if (String.IsNullOrEmpty(input))
       {
-        return null;
+        return String.Empty;
       }
+
 
       // Process Special Codes ...
       if (input.Contains("%"))
@@ -1106,6 +1107,24 @@ namespace IrssUtils
           input = input.Replace(match.Value, envVar);
         }
       }
+
+      return input;
+    }
+
+    /// <summary>
+    /// Replace all instances of environment variables, special values and escape codes.
+    /// </summary>
+    /// <param name="input">The input to process.</param>
+    /// <returns>Processed input string.</returns>
+    public static Byte[] ReplaceSpecial(string input)
+    {
+      if (String.IsNullOrEmpty(input))
+      {
+        return new byte[0];
+      }
+
+      // Process Special Codes ...
+      input = ReplaceSpecialVariables(input);
 
       // Process Escape Codes ...
       bool inEscapeCode = false;
