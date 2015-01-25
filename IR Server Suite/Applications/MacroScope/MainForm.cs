@@ -26,7 +26,8 @@ using System.Windows.Forms;
 using System.Xml;
 using IrssUtils;
 using IrssUtils.Forms;
-using VariableList=Commands.VariableList;
+using System.Windows.Documents;
+using VariableList = Commands.VariableList;
 
 namespace MacroScope
 {

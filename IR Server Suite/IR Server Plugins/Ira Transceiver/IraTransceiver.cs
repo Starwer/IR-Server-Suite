@@ -352,6 +352,10 @@ namespace IRServer.Plugin
 
     #endregion Implementation
 
+
+    internal DeviceType _deviceType { get; set; }
+
+    public string _port { get; set; }
   }
 
 }

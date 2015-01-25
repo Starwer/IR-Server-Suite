@@ -1,0 +1,150 @@
+*******************************************************************************************
+*******************             To Do List                              *******************
+*******************************************************************************************
+
+
+- Release: IR Server Suite - Test Build 1.5.0.90
+    - Massive change in the GUI of Translator
+    - Moved Translator parts and forms to the IRSSUtils
+    - added log verbosity in IRSS server and Translator
+    - fixed some links to documentations
+    - excluded unused Visual projects out of the solution
+
+
+
+
++ Log Verbosity level setting in Server
++ Log Verbosity level setting in Translator
++ Debug input Keyboard
++ Improve Connect/Disconnect
++ Improve Learn
+- IRSS Improvements
+    - Bugfix: handle commands with | and " chars
+        - insert escape characters in plugins GUI: CommandString
+        + expend special character in Command/IrssUtils.SplitCommand()
+    + unified command picker
+    - Macro-editor
+        + grab & drop & Copy
+        + Copy
+        + Tooltip
+        + Menu and shortcut
+        - Test/Help buttons in plugins
+            - unifed test
+            - unified help
+    - Check MP plugin plugins
+
+- IRnet
+    - get available ports from server
+    - Command support
+        - command line
+        - GUI support
+        - Send Key
+        - Mouse
+- IRPS Integration project
+    - IRPS_ISE_addon.ps1
+    - add to Tray
+    - connect to IRPSCommand
+
+- Fast Blast
+- Log/config location setup
+- Fix help
+
+
+- Server:
+    - Event-jam detection
+
+- Multi-mode:
+    - New global events to set modes (Must be blocking event/actions !):
+        - Remote event triggered
+        - Remote event ends
+    - mode special variable
+        - Make this variable: Mode
+        - adapt event mapper as a tree (or keep table?): event/ModeMap (default mode)
+        - Sort by Events/Modes
+
+
+- Power Shell Automation Library Manager
+    - Translator --> Power Translator
+    - IRSS --> tunnel (non PowerShell technology)
+    - PSexec --> replacement for IR Server (PowerShell technology) ?
+    - Output Plugins <=> command plugins
+    - Output Plugins <=> cmdlet
+    - Output Plugins enable:
+        - serialization (save arguments as XML)
+        - registration (coonect to a device/service and create instance)
+    - Input Plugin <=> Class with one (standardized) event (hook)
+
+
+
+*******************************************************************************************
+*******************             Sources                                 *******************
+*******************************************************************************************
+
+Use Asynchronous Event Handling in PowerShell:
+    http://blogs.technet.com/b/heyscriptingguy/archive/2011/06/16/use-asynchronous-event-handling-in-powershell.aspx
+
+Create Events in .NET
+    http://msdn.microsoft.com/en-us/library/9aackb16(v=vs.110).aspx
+    
+How to write a simple Cmdlet:
+    Add manully in the *.csproj file: <Reference Include="System.Management.Automation" />
+    http://msdn.microsoft.com/en-us/library/dd901838(v=vs.85).aspx
+
+UI Automation with Windows PowerShell:
+    http://msdn.microsoft.com/en-us/magazine/cc163301.aspx
+
+
+Windows Automation Snapin for PowerShell (WASP):
+    http://wasp.codeplex.com/
+    
+Synthesizes keystrokes, mouse motions, and button clicks.
+    Check IRSS commands
+    http://msdn.microsoft.com/en-us/library/windows/desktop/ms646310(v=vs.85).aspx
+
+Wait for an event to raise:
+    http://stackoverflow.com/questions/2820870/how-do-i-wait-for-a-c-sharp-event-to-be-raised
+
+PowerShell create cmdlet:
+    http://www.powershellmagazine.com/2014/03/18/writing-a-powershell-module-in-c-part-1-the-basics/
+
+Run script:
+    http://technet.microsoft.com/en-us/library/hh847736.aspx
+    PowerShell –NoExit -NoLogo -NonInteractive -Command "& {Get-EventLog -LogName security}"
+     PowerShell –NoExit -NoLogo -NonInteractive -File .\Get-Script.ps1
+
+- PowerShell ISE cheat-sheet
+    $psISE.CurrentFile.Editor.InsertText("sample")
+    http://www.google.nl/url?sa=t&rct=j&q=&esrc=s&frm=1&source=web&cd=2&ved=0CCgQFjAB&url=http%3A%2F%2Fdownload.microsoft.com%2Fdownload%2F2%2F1%2F2%2F2122F0B9-0EE6-4E6D-BFD6-F9DCD27C07F9%2FWS12_QuickRef_Download_Files%2FPowerShell_ISE_v3.pdf&ei=8o9gVKGXKcTZapmKgLAI&usg=AFQjCNFRbKN4-y6S4_Q5MH2u6TnIqOws8g
+
+- PowerShell ISE add-ons:
+    http://social.technet.microsoft.com/wiki/contents/articles/2969.windows-powershell-ise-add-on-tools.aspx
+    http://www.ravichaganti.com/blog/powershell-ise-addon-menu-generator/
+
+- WPF tutorial
+    http://www.wpftutorial.net/Home.html
+
+- Inter-Process Communication: Use WCF:
+    http://msdn.microsoft.com/en-us/library/ms731082(v=vs.90).aspx
+
+- Play a sound
+    http://scriptolog.blogspot.de/2007/09/playing-sounds-in-powershell.html
+
+- Windows Scripting Host
+    http://blogs.technet.com/b/heyscriptingguy/archive/2014/04/04/powertip-use-powershell-to-display-pop-up-window.aspx
+
+- Launch an application remotely:
+    http://windowsitpro.com/systems-management/psexec
+
+- Get display configuration info:
+    http://blogs.technet.com/b/heyscriptingguy/archive/2013/10/03/use-powershell-to-discover-multi-monitor-information.aspx
+
+- Class vs. Component vs. Control:
+    http://msdn.microsoft.com/en-us/library/0b1dk63b.aspx
+
+- Dynamic Thumbnail View:
+    http://msdn.microsoft.com/en-us/library/windows/desktop/aa969541(v=vs.85).aspx
+
+- CSS Editor
+    http://www.skybound.ca/
+
+    

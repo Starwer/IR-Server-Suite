@@ -1,0 +1,61 @@
+[Config]
+Compilator.SaveAll=0
+Compilator.Capture=0
+Compilator.HideOutput=0
+Compilator.LogType=0
+DefaultCPIndex=0
+LogtoEnd=1
+DontOpen=0
+AbsolutePath=0
+FileFormat=0
+ProjectFilesOnly=0
+[Project tree]
+IRPowerShell
+	+DOCUMENTS
+		IR Server Suite\Applications\IR Net\doc\sources.txt
+		..\..\..\..\Documents\Accounts\GitHub.txt
+	+Build
+		Build\BuildScript.bat
+		setup\setup.nsi
+	+Configs
+		IR Server Suite\IR Server Suite.sln
+		IR Server Suite\Applications\IR Net\doc\testit.ps1
+		C:\ProgramData\IR Server Suite\IR Server\IR Server.xml
+	+Logs
+		C:\ProgramData\IR Server Suite\Logs\IR Server.log
+		C:\ProgramData\IR Server Suite\Logs\IR Server Tray.log
+		C:\ProgramData\IR Server Suite\Logs\IR Server Configuration.log
+		C:\ProgramData\IR Server Suite\Logs\Translator.log
+		C:\ProgramData\IR Server Suite\Logs\IRnet.log
+[Open project files]
+0=..\..\..\..\Documents\Accounts\GitHub.txt
+1=Build\BuildScript.bat
+2=Build\build_Release.log
+3=IR Server Suite\IR Server Plugins\IR Server Plugin Interface\IR Server Plugin Interface.csproj
+4=setup\setup.nsi
+5=C:\ProgramData\IR Server Suite\Logs\IR Server.log
+6=IR Server Suite\Applications\IR Net\doc\sources.txt
+[Selected Project Files]
+Main=
+Selected=Build\build_Release.log
+[..\..\..\..\Documents\Accounts\GitHub.txt]
+TopLine=1
+Caret=10,3
+[Build\BuildScript.bat]
+TopLine=1
+Caret=1,17
+[Build\build_Release.log]
+TopLine=3883
+Caret=23,3913
+[IR Server Suite\IR Server Plugins\IR Server Plugin Interface\IR Server Plugin Interface.csproj]
+TopLine=37
+Caret=49,81
+[setup\setup.nsi]
+TopLine=303
+Caret=1,334
+[C:\ProgramData\IR Server Suite\Logs\IR Server.log]
+TopLine=1
+Caret=80,27
+[IR Server Suite\Applications\IR Net\doc\sources.txt]
+TopLine=1
+Caret=15,23

@@ -192,7 +192,7 @@ namespace IrssComms
   /// Message class for passing over network.
   /// </summary>
   [DebuggerDisplay("Type={Type}, Flags={Flags}, Data={GetDataAsString()}")]
-  public class IrssMessage
+  public class IrssMessage : EventArgs
   {
     #region Const
 
@@ -215,9 +215,9 @@ namespace IrssComms
 
     #region Protected fields
 
-    protected MessageType _messageType;
-    protected MessageFlags _messageFlags;
-    protected IDictionary<string, object> _messageData = new Dictionary<string, object>();
+    protected MessageType pMessageType;
+    protected MessageFlags pMessageFlags;
+    protected IDictionary<string, object> pMessageData = new Dictionary<string, object>();
 
     #endregion
 
@@ -228,8 +228,8 @@ namespace IrssComms
     /// </summary>
     protected IrssMessage()
     {
-      _messageType = MessageType.Unknown;
-      _messageFlags = MessageFlags.None;
+      pMessageType = MessageType.Unknown;
+      pMessageFlags = MessageFlags.None;
     }
 
     /// <summary>
@@ -239,8 +239,8 @@ namespace IrssComms
     /// <param name="flags">The message flags.</param>
     public IrssMessage(MessageType type, MessageFlags flags)
     {
-      _messageType = type;
-      _messageFlags = flags;
+      pMessageType = type;
+      pMessageFlags = flags;
     }
 
     /// <summary>
@@ -276,7 +276,7 @@ namespace IrssComms
     /// </summary>
     public MessageType Type
     {
-      get { return _messageType; }
+      get { return pMessageType; }
     }
 
     /// <summary>
@@ -284,8 +284,16 @@ namespace IrssComms
     /// </summary>
     public MessageFlags Flags
     {
-      get { return _messageFlags; }
-      set { _messageFlags = value; }
+      get { return pMessageFlags; }
+      set { pMessageFlags = value; }
+    }
+
+    /// <summary>
+    /// Data.
+    /// </summary>
+    public string DataString
+    {
+        get { return GetDataAsString(); }
     }
 
     /// <summary>
@@ -294,8 +302,8 @@ namespace IrssComms
     /// </summary>
     public IDictionary<string, object> MessageData
     {
-      get { return _messageData; }
-      set { _messageData = value; }
+      get { return pMessageData; }
+      set { pMessageData = value; }
     }
 
     #endregion Properties
@@ -307,9 +315,9 @@ namespace IrssComms
     /// </summary>
     public byte[] GetDataAsBytes()
     {
-      if (!_messageData.ContainsKey(DATA)) return null;
+      if (!pMessageData.ContainsKey(DATA)) return null;
 
-      return _messageData[DATA] as byte[];
+      return pMessageData[DATA] as byte[];
     }
 
     /// <summary>
@@ -318,9 +326,9 @@ namespace IrssComms
     public void SetDataAsBytes(byte[] data)
     {
       if (data == null)
-        _messageData[DATA] = null;
+        pMessageData[DATA] = null;
       else
-        _messageData[DATA] = (byte[])data.Clone();
+        pMessageData[DATA] = (byte[])data.Clone();
 
       SetMessageData();
     }
@@ -341,9 +349,9 @@ namespace IrssComms
     public void SetDataAsString(string data)
     {
       if (String.IsNullOrEmpty(data))
-        _messageData[DATA] = null;
+        pMessageData[DATA] = null;
       else
-        _messageData[DATA] = Encoding.ASCII.GetBytes(data);
+        pMessageData[DATA] = Encoding.ASCII.GetBytes(data);
 
       SetMessageData();
     }
@@ -353,7 +361,7 @@ namespace IrssComms
     /// </summary>
     private void SetMessageData()
     {
-      switch (_messageType)
+      switch (pMessageType)
       {
         case MessageType.RemoteEvent:
         case MessageType.ForwardRemoteEvent:
@@ -361,10 +369,10 @@ namespace IrssComms
             byte[] data = GetDataAsBytes();
 
             int deviceNameSize = BitConverter.ToInt32(data, 0);
-            _messageData[DEVICE_NAME] = System.Text.Encoding.ASCII.GetString(data, 4, deviceNameSize);
+            pMessageData[DEVICE_NAME] = System.Text.Encoding.ASCII.GetString(data, 4, deviceNameSize);
 
             int keyCodeSize = BitConverter.ToInt32(data, 4 + deviceNameSize);
-            _messageData[KEY_CODE] = System.Text.Encoding.ASCII.GetString(data, 8 + deviceNameSize, keyCodeSize);
+            pMessageData[KEY_CODE] = System.Text.Encoding.ASCII.GetString(data, 8 + deviceNameSize, keyCodeSize);
           }
           break;
 
@@ -373,8 +381,8 @@ namespace IrssComms
           {
             byte[] data = GetDataAsBytes();
 
-            _messageData[V_KEY] = BitConverter.ToInt32(data, 0);
-            _messageData[KEY_UP] = BitConverter.ToBoolean(data, 4);
+            pMessageData[V_KEY] = BitConverter.ToInt32(data, 0);
+            pMessageData[KEY_UP] = BitConverter.ToBoolean(data, 4);
           }
           break;
 
@@ -383,9 +391,9 @@ namespace IrssComms
           {
             byte[] data = GetDataAsBytes();
 
-            _messageData[DELTA_X] = BitConverter.ToInt32(data, 0);
-            _messageData[DELTA_Y] = BitConverter.ToInt32(data, 4);
-            _messageData[BUTTONS] = BitConverter.ToInt32(data, 8);
+            pMessageData[DELTA_X] = BitConverter.ToInt32(data, 0);
+            pMessageData[DELTA_Y] = BitConverter.ToInt32(data, 4);
+            pMessageData[BUTTONS] = BitConverter.ToInt32(data, 8);
           }
           break;
       }
@@ -404,8 +412,8 @@ namespace IrssComms
 
       byte[] byteArray = new byte[8 + dataLength];
 
-      BitConverter.GetBytes((int)_messageType).CopyTo(byteArray, 0);
-      BitConverter.GetBytes((int)_messageFlags).CopyTo(byteArray, 4);
+      BitConverter.GetBytes((int)pMessageType).CopyTo(byteArray, 0);
+      BitConverter.GetBytes((int)pMessageFlags).CopyTo(byteArray, 4);
 
       if (GetDataAsBytes() != null)
         GetDataAsBytes().CopyTo(byteArray, 8);
