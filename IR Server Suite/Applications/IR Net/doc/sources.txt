@@ -6,7 +6,7 @@
 - Release: IR Server Suite - Test Build 1.5.0.90
     - Massive change in the GUI of Translator
     - Moved Translator parts and forms to the IRSSUtils
-    - added log verbosity in IRSS server and Translator
+    - added log verbosity in IRSS Server and Translator
     - fixed some links to documentations
     - excluded unused Visual projects out of the solution
 
