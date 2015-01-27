@@ -22,7 +22,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
 using IRServer.Plugin;
@@ -33,8 +33,6 @@ using SourceGrid.Cells.Controllers;
 using Button = SourceGrid.Cells.Button;
 using CheckBox = SourceGrid.Cells.CheckBox;
 using ColumnHeader = SourceGrid.Cells.ColumnHeader;
-using IRServer.Configuration.Properties;
-using System.ComponentModel;
 
 namespace IRServer.Configuration
 {
@@ -279,6 +277,10 @@ namespace IRServer.Configuration
           {
             IrssLog.Info("Plugin {0}: detected", plugin.Name);
           }
+          if (detected == PluginBase.DetectionResult.DeviceIsPlugAndPlay)
+          {
+            IrssLog.Info("Plugin {0}: Plug&Play device detected", plugin.Name);
+          }
           if (detected == PluginBase.DetectionResult.DeviceException)
           {
             IrssLog.Warn("Plugin {0}: exception during Detect()", plugin.Name);
@@ -287,12 +289,12 @@ namespace IRServer.Configuration
           // Receive
           checkBox = gridPlugins[row, ColReceive] as CheckBox;
           if (checkBox != null)
-            checkBox.Checked = (detected == PluginBase.DetectionResult.DevicePresent ? true : false);
+            checkBox.Checked = (detected == PluginBase.DetectionResult.DevicePresent || detected == PluginBase.DetectionResult.DeviceIsPlugAndPlay ? true : false);
 
           // Transmit
           checkBox = gridPlugins[row, ColTransmit] as CheckBox;
           if (checkBox != null)
-            checkBox.Checked = (detected == PluginBase.DetectionResult.DevicePresent ? true : false);
+            checkBox.Checked = (detected == PluginBase.DetectionResult.DevicePresent || detected == PluginBase.DetectionResult.DeviceIsPlugAndPlay ? true : false);
         }
         catch (Exception ex)
         {

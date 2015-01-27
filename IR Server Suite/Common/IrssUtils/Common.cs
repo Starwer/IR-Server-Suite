@@ -582,7 +582,11 @@ namespace IrssUtils
 
             string[] commands = new string[elements];
 
+<<<<<<< HEAD
             int idx = 0;
+=======
+      Uri uri = new Uri(ReplaceSpecialVariables(commands[0]));
+>>>>>>> remotes/upstream/Unoficial_.net4
 
 
             StringBuilder arg = new StringBuilder(command.Length);
@@ -850,9 +854,23 @@ namespace IrssUtils
             if (commands == null)
                 throw new ArgumentNullException("commands");
 
+<<<<<<< HEAD
             using (TcpClient tcpClient = new TcpClient())
             {
                 tcpClient.Connect(commands[0], int.Parse(commands[1]));
+=======
+    /// <summary>
+    /// Returns a list of IR Commands.
+    /// </summary>
+    /// <returns>string[] of IR Commands.</returns>
+    public static string[] GetIRList(bool commandPrefix)
+    {
+      if (!Directory.Exists(FolderIRCommands))
+        Directory.CreateDirectory(FolderIRCommands);
+
+      string[] files = Directory.GetFiles(FolderIRCommands, '*' + FileExtensionIR);
+      string[] list = new string[files.Length];
+>>>>>>> remotes/upstream/Unoficial_.net4
 
                 using (NetworkStream networkStream = tcpClient.GetStream())
                 {
@@ -878,6 +896,7 @@ namespace IrssUtils
             if (String.IsNullOrEmpty(command))
                 throw new ArgumentNullException("command");
 
+<<<<<<< HEAD
             switch (command)
             {
                 case MouseClickLeft:
@@ -957,6 +976,25 @@ namespace IrssUtils
         /// </summary>
         /// <param name="command">The drive letter of the CD-ROM drive to eject the tray on.</param>
         public static void ProcessEjectCommand(string command)
+=======
+    /// <summary>
+    /// Replace all instances of environment variables and special values.
+    /// </summary>
+    /// <param name="input">The input to process.</param>
+    /// <returns>Processed input string.</returns>
+    public static string ReplaceSpecialVariables(string input)
+    {
+      if (String.IsNullOrEmpty(input))
+      {
+        return String.Empty;
+      }
+
+
+      // Process Special Codes ...
+      if (input.Contains("%"))
+      {
+        foreach (Match match in Regex.Matches(input, @"%\w+%"))
+>>>>>>> remotes/upstream/Unoficial_.net4
         {
             if (String.IsNullOrEmpty(command))
                 throw new ArgumentNullException("command");
@@ -980,12 +1018,42 @@ namespace IrssUtils
                 throw new CommandExecutionException(String.Format("Sound Command ({0}) failed to play", command));
         }
 
+<<<<<<< HEAD
         /// <summary>
         /// Given a split HTTP Message Command this method will send the HTTP message according to the command structure supplied.
         /// </summary>
         /// <param name="commands">An array of arguments for the method (the output of SplitHttpMessageCommand).</param>
         /// <returns>The response to the command.</returns>
         public static string ProcessHttpCommand(string[] commands)
+=======
+      return input;
+    }
+
+    /// <summary>
+    /// Replace all instances of environment variables, special values and escape codes.
+    /// </summary>
+    /// <param name="input">The input to process.</param>
+    /// <returns>Processed input string.</returns>
+    public static Byte[] ReplaceSpecial(string input)
+    {
+      if (String.IsNullOrEmpty(input))
+      {
+        return new byte[0];
+      }
+
+      // Process Special Codes ...
+      input = ReplaceSpecialVariables(input);
+
+      // Process Escape Codes ...
+      bool inEscapeCode = false;
+      bool inHexCode = false;
+      StringBuilder hexCode = new StringBuilder();
+      List<Byte> output = new List<Byte>();
+
+      foreach (char currentChar in input)
+      {
+        if (inEscapeCode)
+>>>>>>> remotes/upstream/Unoficial_.net4
         {
             if (commands == null)
                 throw new ArgumentNullException("commands");

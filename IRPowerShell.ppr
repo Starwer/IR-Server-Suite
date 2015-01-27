@@ -37,7 +37,7 @@ IRPowerShell
 6=IR Server Suite\Applications\IR Net\doc\sources.txt
 [Selected Project Files]
 Main=
-Selected=Build\build_Release.log
+Selected=..\..\..\..\Documents\Accounts\GitHub.txt
 [..\..\..\..\Documents\Accounts\GitHub.txt]
 TopLine=1
 Caret=10,3
@@ -55,7 +55,7 @@ TopLine=303
 Caret=1,334
 [C:\ProgramData\IR Server Suite\Logs\IR Server.log]
 TopLine=1
-Caret=80,27
+Caret=39,27
 [IR Server Suite\Applications\IR Net\doc\sources.txt]
 TopLine=1
-Caret=15,23
+Caret=1,6

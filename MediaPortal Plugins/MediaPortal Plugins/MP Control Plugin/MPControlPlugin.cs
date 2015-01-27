@@ -34,18 +34,19 @@ using IrssUtils.Forms;
 using MediaPortal.Configuration;
 using MediaPortal.GUI.Library;
 using MediaPortal.Hardware;
+using MediaPortal.Plugins.IRSS.MPControlPlugin.Forms;
+using MediaPortal.Plugins.IRSS.MPControlPlugin.InputMapper;
 using MediaPortal.Profile;
 using Microsoft.Win32;
 using MPUtils;
 
-namespace MediaPortal.Plugins
+namespace MediaPortal.Plugins.IRSS.MPControlPlugin
 {
-  [PluginIcons("MediaPortal.Plugins.MPControlPlugin.IRSS.iconGreen.gif",
-    "MediaPortal.Plugins.MPControlPlugin.IRSS.iconGray.gif")]
-
   /// <summary>
-    /// MediaPortal Control Plugin for IR Server.
-    /// </summary>
+  /// MediaPortal Control Plugin for IR Server.
+  /// </summary>
+  [PluginIcons("MediaPortal.Plugins.IRSS.MPControlPlugin.iconGreen.gif",
+    "MediaPortal.Plugins.IRSS.MPControlPlugin.iconGray.gif")]
   public class MPControlPlugin : IPlugin, ISetupForm
   {
     #region Constants
@@ -680,6 +681,8 @@ namespace MediaPortal.Plugins
       // If user has stipulated that MP must have focus to recognize commands ...
       if (RequireFocus && !GUIGraphicsContext.HasFocus)
         return;
+
+      IrssUtils.Win32.SetThreadExecutionState(IrssUtils.Win32.EXECUTION_STATE.ES_DISPLAY_REQUIRED);
 
       foreach (MappedKeyCode mapping in _remoteMap)
       {
